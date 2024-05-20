@@ -42,7 +42,7 @@
     @apply flex-1 
 }
 
-.todolist li.todo:hover{
+.todolist li.todo:hover button{
     @apply block
 }
 
@@ -51,7 +51,7 @@
 }
 
 .todolist li.todo input[type="checkbox"]{
-    @apply w-4 h-4 cursor-pointer
+    @apply w-4 h-4 cursor-pointer 
 }
 
 .todolist li.todo-editing input[type="text"]{

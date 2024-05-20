@@ -17,13 +17,13 @@ export class TodoComponent {
       editing: false, 
     },
     {
-      id: 1,
+      id: 2,
       title: "Buy bread",
       completed: false,
       editing: false, 
     },
     {
-      id: 1,
+      id: 3,
       title: "Buy cheese",
       completed: false,
       editing: false, 
@@ -33,7 +33,7 @@ export class TodoComponent {
   
   filter = signal<FilterType>('all');
   
-  newTodo = new FormControl ('asdsajdfjal',({
+  newTodo = new FormControl ('',({
     nonNullable: true,
     validators: [Validators.required, Validators.minLength(3)],
   })) 
@@ -52,8 +52,24 @@ export class TodoComponent {
         ];
     
       });
+      this.newTodo.reset();
     } else {
+      this.newTodo.reset();
       
     }
+    
+  }
+  
+  toggleTodo(todoId: number){
+     return this.todolist.update((prev_todos)=> prev_todos.map((todo) => {
+      if (todo.id === todoId) {
+        return{
+          ...todo,
+          completed: !todo.completed,
+        };
+      }
+      return {...todo, editing: false}
+    })
+   );
   }
 }
