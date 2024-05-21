@@ -16,7 +16,7 @@
             @if (todo.editing) {
                  <!-- ya editado -->
             <li class="todo-editing">
-                <input type="text" placeholder="Editar tarea">
+                <input type="text" placeholder="Editar tarea" [value]="todo.title" (keydown.enter)="saveTitleTodo(todo.id, $event)">
             </li> 
             }
             @else {
@@ -24,8 +24,8 @@
             <li class="todo">
                 <input type="checkbox" [checked]="todo.completed" (click)="toggleTodo(todo.id)">
                 <label>{{ todo.title }}</label>
-                @if (!todo.completed) {<button>Editar</button>}
-                <button class="text-red-500">Eliminar</button>
+                @if (!todo.completed) {<button (click)="updateTodo(todo.id)">Editar</button>}
+                <button class="text-red-500" (click)="removeTodo(todo.id)">Eliminar</button>
             </li>
             }
         }

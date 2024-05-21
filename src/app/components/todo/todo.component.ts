@@ -61,15 +61,48 @@ export class TodoComponent {
   }
   
   toggleTodo(todoId: number){
-     return this.todolist.update((prev_todos)=> prev_todos.map((todo) => {
-      if (todo.id === todoId) {
+     return this.todolist.update((prev_todos) => 
+     prev_todos.map((todo) => {
+      return todo.id === todoId ? 
+        {...todo, completed: !todo.completed} :
+        todo;
+      
+      /* if (todo.id === todoId) {
         return{
           ...todo,
           completed: !todo.completed,
         };
       }
-      return {...todo, editing: false}
+      return {...todo, editing: false} */
     })
    );
   }
+  
+  removeTodo(todoId: number){
+    this.todolist.update((prev_todos) => 
+    prev_todos.filter((todo) => todo.id !== todoId) 
+    );
+  }
+  
+  updateTodo(todoId: number){
+    return this.todolist.update((prev_todos) =>
+    prev_todos.map((todo) => {
+      return todo.id === todoId ?
+      {...todo, editing: true} : 
+      {...todo, editing: false};
+    })
+    );
+  }
+  
+  saveTitleTodo(todoId: number, event: Event){
+    const title = (event.target as HTMLInputElement).value;
+    this.todolist.update((prev_todos) => 
+    prev_todos.map((todo) => {
+      return todo.id === todoId ?
+      {...todo, title: title, editing: false} :
+      todo;
+    })
+    );
+  }
+  
 }
