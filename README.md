@@ -1,27 +1,55 @@
-# ToDoApp
+# Todo List App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.8.
+This is a simple Todo List application built using Angular.js. The app allows users to add, delete, edit and mark tasks as completed. It provides a basic interface for managing daily tasks.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Add new tasks to the list.
+- Delete tasks from the list.
+- Edit tasks.
+- Mark tasks as completed.
+- Filter tasks by their status (all, active, completed).
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
 
-## Build
+Make sure you have Node.js and npm installed. You can download Node.js and npm from [here](https://nodejs.org/).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Installation
 
-## Running unit tests
+1. Clone the repository:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    ```bash
+    git clone https://github.com/DinisRk/TodoListApp.git
+    cd TodoListApp
+    ```
 
-## Running end-to-end tests
+2. Install the Angular CLI globally if you haven't already:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+    ```bash
+    npm install -g @angular/cli
+    ```
 
-## Further help
+3. Install the project dependencies:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+    ```bash
+    npm install
+    ```
+
+4. Start the development server:
+
+    ```bash
+    ng serve
+    ```
+
+5. Open your browser and navigate to `http://localhost:4200` to see the application in action.
+
+## Usage
+
+- Add a new task by typing in the input field and pressing Enter or clicking the "+" button.
+- Mark a task as completed by clicking the checkbox next to it.
+- Delete a task by clicking the "Delete" button next to it.
+- Edit a task by clicking the edit button next to it.
+- Filter tasks by their status using the filter options.
+
