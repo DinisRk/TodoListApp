@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
+import { CommonModule, JsonPipe } from '@angular/common';
+import { Component, signal, computed, OnInit, effect } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FilterType, TodoModel } from 'src/app/models/todo';
 
@@ -8,35 +8,42 @@ import { FilterType, TodoModel } from 'src/app/models/todo';
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css']
 })
-export class TodoComponent {
-  todolist = signal<TodoModel[]>([
-    {
-      id: 1,
-      title: "Buy milk",
-      completed: false,
-      editing: false, 
-    },
-    {
-      id: 2,
-      title: "Buy bread",
-      completed: false,
-      editing: false, 
-    },
-    {
-      id: 3,
-      title: "Buy cheese",
-      completed: false,
-      editing: false, 
-    },
-    
-  ]);
+export class TodoComponent implements OnInit {
+  todolist = signal<TodoModel[]>([]);
   
   filter = signal<FilterType>('all');
+  
+  todoListFiltered = computed(() => {
+    const filter = this.filter();
+    const todos = this.todolist();
+    
+    switch(filter){
+      case 'active': 
+        return todos.filter((todo) => !todo.completed);
+      case 'completed':
+        return todos.filter((todo) => todo.completed);
+      default:
+        return todos;
+    }
+  });
   
   newTodo = new FormControl ('',({
     nonNullable: true,
     validators: [Validators.required, Validators.minLength(3)],
-  })) 
+  }));
+  
+  constructor(){
+    effect(() => {
+      localStorage.setItem('todos', JSON.stringify(this.todolist()));
+    });
+  }
+  
+  ngOnInit(): void{
+    const storage = localStorage.getItem('todos');
+    if (storage){
+      this.todolist.set(JSON.parse(storage)); 
+    }
+  }
 
   changeFilter(filterString: FilterType){
     this.filter.set(filterString);

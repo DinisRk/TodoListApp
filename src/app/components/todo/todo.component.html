@@ -12,7 +12,7 @@
     </div>
     
     <ul class="todolist">
-        @for (todo of todolist(); track todo.id){
+        @for (todo of todoListFiltered(); track todo.id){
             @if (todo.editing) {
                  <!-- ya editado -->
             <li class="todo-editing">
